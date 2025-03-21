@@ -1,10 +1,10 @@
 # bot/sender.py
 
 import pandas as pd
-import pywhatkit as kit
+import pywhatkit as kit 
 import time
 import logging
-from bot.config import EXCEL_FILE, LOG_FILE, MESSAGE_DELAY
+from config import DB_CONFIG, LOG_FILE, MESSAGE_DELAY
 
 # Set up logging
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -14,7 +14,7 @@ def send_whatsapp_messages():
     Reads contacts from an Excel file and sends WhatsApp messages to each recipient.
     """
     try:
-        df = pd.read_excel(EXCEL_FILE)
+        df = pd.read_excel(DB_CONFIG)
 
         for index, row in df.iterrows():
             phone = row["Phone Number"]

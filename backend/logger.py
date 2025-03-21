@@ -1,7 +1,7 @@
 # bot/logger.py
 
 import logging
-from bot.config import LOG_FILE
+from backend.config import LOG_FILE
 
 # Configure logging settings
 logging.basicConfig(
