@@ -1,143 +1,385 @@
 /* General container styling */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Full viewport height */
-    background-color: #f5f5f5; /* Light background for contrast */
-    flex-direction: column; /* Stack containers vertically */
-    padding: 40px 20px; /* Add spacing at top and bottom, reduce on small screens */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  background-color: #f5f5f5; /* Light background for contrast */
+  flex-direction: column; /* Stack containers vertically */
+  padding: 40px 20px; /* Add spacing at top and bottom, reduce on small screens */
 }
 
+/* Container styling for AddContact, SendMessage, and MessageList */
 .container {
-    background-color: #45937b; /* Cray color */
-    padding: 40px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 1000px; /* Set max width to 880px */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    margin-bottom: 40px; /* Space between containers */
+  background-color: #2e7d32; /* iPhone-like WhatsApp green background */
+  padding: 40px;
+  border-radius: 15px; /* Rounded corners for iPhone-like theme */
+  width: 100%;
+  max-width: 600px; /* Adjusted max-width for consistency */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  text-align: center;
+  margin-bottom: 40px; /* Space between containers */
+  color: white; /* White text for contrast */
 }
 
 /* Responsive Design */
 @media (max-width: 920px) {
-    .container {
-        width: calc(100% - 40px); /* Keep 20px margin on left & right */
-    }
+  .container {
+      width: calc(100% - 40px); /* Keep 20px margin on left & right */
+  }
 }
 
 @media (max-width: 600px) {
-    .container {
-        width: calc(100% - 20px); /* Keep 10px margin on left & right */
-        padding: 20px; /* Reduce padding for smaller screens */
-    }
+  .container {
+      width: calc(100% - 20px); /* Keep 10px margin on left & right */
+      padding: 20px; /* Reduce padding for smaller screens */
+  }
 }
 
-  
-  /* Heading styling */
-  h2 {
-    color: white;
-    text-align: center;
-    font-size: 24px;
-  }
-  h3 {
-    color: white;
-    text-align: center;
-    font-size: 18px;
-  }
-  
-  /* Form styling */
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-    .file-upload-container button {
-        margin: 0 30px; /* Each button gets 30px margin from the center, making 60px total */
-    }
-    .file-upload-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px; /* Adds space between elements inside the container */
-    }
-  
-  /* Input and textarea styling */
-  input,
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #999;
-    border-radius: 5px;
-    background-color: white;
-    color: black;
-    font-size: 16px;
-  }
-  
-  textarea {
-    height: 100px;
-    resize: none;
-  }
-  
-  /* Button styling */
-  button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 50%;
-  }
-
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 60px; /* Ensures 60px space between buttons */
-    margin-top: 20px; /* Adds spacing above the buttons */
+/* Headings */
+h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
-  
-  button:hover {
-    background-color: #0056b3;
+
+h3 {
+  color: #e0e0e0; /* Light gray for the OR text */
+  text-align: center;
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Adds space between elements inside the container */
+}
+
+.file-upload-container button {
+  margin: 0 30px; /* Each button gets 30px margin from the center, making 60px total */
+}
+
+/* Form group styling (for SendMessage) */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input, textarea, and select styling */
+.form-group input,
+.form-group select,
+.form-group textarea,
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Rounded corners for inputs */
+  font-size: 16px;
+  background-color: #fff; /* White background for inputs */
+  color: #333; /* Dark text for readability */
+}
+
+.form-group textarea,
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Custom dropdown arrow for select */
+select {
+  appearance: none; /* Remove default dropdown arrow */
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNUw4IDlMMTIgNSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+") no-repeat right 10px center; /* Custom dropdown arrow */
+  background-color: #fff;
+  padding-right: 30px; /* Space for the arrow */
+}
+
+/* Button styling */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 60px; /* Ensures 60px space between buttons */
+  margin-top: 20px; /* Adds spacing above the buttons */
+}
+
+button {
+  background-color: #ffffff; /* White background for inactive button */
+  color: #333; /* Dark text for contrast */
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 50%; /* Match the original width */
+  transition: all 0.3s ease; /* Smooth transition for animations */
+}
+
+/* Active button (e.g., when clicked or selected) */
+button:active,
+button:focus {
+  background-color: #007bff; /* Blue background for active state */
+  color: white; /* White text for contrast */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glow effect */
+}
+
+/* Hover effect for buttons (when not disabled) */
+button:hover:not(:disabled) {
+  background-color: #007bff; /* Darker blue on hover */
+  color: white;
+  transform: scale(1.02); /* Slight scale-up animation */
+}
+
+/* Disabled button */
+button:disabled {
+  background-color: #cccccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Message List Styling */
+.message-list {
+  list-style: none;
+  padding: 0;
+}
+
+.message-item {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: black;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 5px solid #007bff;
+}
+
+/* Status color coding */
+.status {
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.status.pending {
+  color: orange;
+}
+
+.status.sent {
+  color: green;
+}
+
+.status.failed {
+  color: red;
+}/* General container styling */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  background-color: #f5f5f5; /* Light background for contrast */
+  flex-direction: column; /* Stack containers vertically */
+  padding: 40px 20px; /* Add spacing at top and bottom, reduce on small screens */
+}
+
+/* Container styling for AddContact, SendMessage, and MessageList */
+.container {
+  background-color: #34C759; /* iPhone button green */
+  padding: 40px;
+  border-radius: 15px; /* Rounded corners for iPhone-like theme */
+  width: 100%;
+  max-width: 600px; /* Adjusted max-width for consistency */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  text-align: center;
+  margin-bottom: 40px; /* Space between containers */
+  color: white; /* White text for contrast */
+}
+
+/* Responsive Design */
+@media (max-width: 920px) {
+  .container {
+      width: calc(100% - 40px); /* Keep 20px margin on left & right */
   }
-  
-  /* Message List Styling */
-  .message-list {
-    list-style: none;
-    padding: 0;
+}
+
+@media (max-width: 600px) {
+  .container {
+      width: calc(100% - 20px); /* Keep 10px margin on left & right */
+      padding: 20px; /* Reduce padding for smaller screens */
   }
-  
-  .message-item {
-    background: white;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    color: black;
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 5px solid #007bff;
-  }
-  
-  /* Status color coding */
-  .status {
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .status.pending {
-    color: orange;
-  }
-  
-  .status.sent {
-    color: green;
-  }
-  
-  .status.failed {
-    color: red;
-  }
-  
+}
+
+/* Headings */
+h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h3 {
+  color: #e0e0e0; /* Light gray for the OR text */
+  text-align: center;
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Adds space between elements inside the container */
+}
+
+.file-upload-container button {
+  margin: 0 30px; /* Each button gets 30px margin from the center, making 60px total */
+}
+
+/* Form group styling (for SendMessage) */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input, textarea, and select styling */
+.form-group input,
+.form-group select,
+.form-group textarea,
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px; /* Rounded corners for inputs */
+  font-size: 16px;
+  background-color: #fff; /* White background for inputs */
+  color: #333; /* Dark text for readability */
+}
+
+.form-group textarea,
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Custom dropdown arrow for select */
+select {
+  appearance: none; /* Remove default dropdown arrow */
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNUw4IDlMMTIgNSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+") no-repeat right 10px center; /* Custom dropdown arrow */
+  background-color: #fff;
+  padding-right: 30px; /* Space for the arrow */
+}
+
+/* Button styling */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 60px; /* Ensures 60px space between buttons */
+  margin-top: 20px; /* Adds spacing above the buttons */
+}
+
+button {
+  background-color: #ffffff; /* White background for inactive button */
+  color: #333; /* Dark text for contrast */
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 50%; /* Match the original width */
+  transition: all 0.3s ease; /* Smooth transition for animations */
+}
+
+/* Active button (e.g., when clicked or selected) */
+button:active,
+button:focus {
+  background-color: #007AFF; /* iPhone blue for active state */
+  color: white; /* White text for contrast */
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.5); /* Glow effect with iPhone blue */
+}
+
+/* Hover effect for buttons (when not disabled) */
+button:hover:not(:disabled) {
+  background-color: #005BB5; /* Darker shade of iPhone blue on hover */
+  color: white;
+  transform: scale(1.02); /* Slight scale-up animation */
+}
+
+/* Disabled button */
+button:disabled {
+  background-color: #cccccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Message List Styling */
+.message-list {
+  list-style: none;
+  padding: 0;
+}
+
+.message-item {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: black;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 5px solid #007AFF; /* iPhone blue for the border */
+}
+
+/* Status color coding */
+.status {
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.status.pending {
+  color: orange;
+}
+
+.status.sent {
+  color: green;
+}
+
+.status.failed {
+  color: red;
+}

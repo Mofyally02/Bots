@@ -5,67 +5,44 @@ import "../styles/styles.css";
 const AddContact = () => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [contacts, setContacts] = useState([]);
   const [file, setFile] = useState(null);
   const [disableInputs, setDisableInputs] = useState(false);
 
-  // Add a contact manually and send to the database
+  const validatePhoneNumber = (number) => {
+    // Basic validation for international format (e.g., +1234567890)
+    const phoneRegex = /^\+\d{10,15}$/;
+    return phoneRegex.test(number);
+  };
+
   const handleAddContact = async () => {
     if (!name.trim() || !phoneNumber.trim()) {
       alert("Please enter both Name and Phone Number.");
       return;
     }
 
-    const newContact = { name, phoneNumber };
-    try {
-      await addMultipleContacts([newContact]); // Save to database
-      setContacts([...contacts, newContact]);
-      alert("Contact added successfully!");
-      setName("");
-      setPhoneNumber("");
-      setDisableInputs(true);
-    } catch (error) {
-      console.error("Error adding contact:", error);
-      alert("Failed to add contact. Try again.");
-    }
-  };
-
-  // Remove a contact from the list
-  const handleRemoveContact = (index) => {
-    const updatedContacts = contacts.filter((_, i) => i !== index);
-    setContacts(updatedContacts);
-    if (updatedContacts.length === 0) {
-      setDisableInputs(false);
-    }
-  };
-
-  // Submit all added contacts to the database
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (contacts.length === 0) {
-      alert("Please add at least one contact.");
+    if (!validatePhoneNumber(phoneNumber)) {
+      alert("Please enter a valid phone number in international format (e.g., +1234567890).");
       return;
     }
 
+    const newContact = { name, phoneNumber };
     try {
-      await addMultipleContacts(contacts);
-      alert("Contacts added successfully!");
-      setContacts([]);
+      await addMultipleContacts([newContact]);
+      alert("Contact added successfully!");
+      setName("");
+      setPhoneNumber("");
       setDisableInputs(false);
     } catch (error) {
-      console.error("Error adding contacts:", error);
-      alert("Failed to add contacts. Try again.");
+      console.error("Error adding contact:", error);
+      alert(`Failed to add contact: ${error.message || "Try again."}`);
     }
   };
 
-  // Handle file upload selection
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setContacts([]); // Clear manual entries
     setDisableInputs(true);
   };
 
-  // Upload file and send data to the database
   const handleFileUpload = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -80,7 +57,7 @@ const AddContact = () => {
       setDisableInputs(false);
     } catch (error) {
       console.error("Error uploading file:", error);
-      alert("Failed to upload file. Try again.");
+      alert(`Failed to upload file: ${error.message || "Try again."}`);
     }
   };
 
@@ -101,7 +78,7 @@ const AddContact = () => {
       <div className="form-group">
         <input
           type="text"
-          placeholder="Phone Number"
+          placeholder="Phone Number (e.g., +1234567890)"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           disabled={disableInputs}
@@ -111,22 +88,6 @@ const AddContact = () => {
         Add Contact
       </button>
 
-      {/* Display added contacts */}
-      {contacts.length > 0 && (
-        <div className="contacts-list">
-          <h3>Contacts to be Added</h3>
-          <ul>
-            {contacts.map((contact, index) => (
-              <li key={index}>
-                {contact.name} - {contact.phoneNumber}
-                <button  onClick={() => handleRemoveContact(index)}  style={{ width: "60px" }} > ❌ </button>
-              </li>
-            ))}
-          </ul>
-          <button onClick={handleSubmit}>Submit Contacts</button>
-        </div>
-      )}
-
       <h3>OR</h3>
 
       {/* File Upload Form */}
@@ -135,9 +96,9 @@ const AddContact = () => {
           type="file"
           accept=".xlsx, .csv"
           onChange={handleFileChange}
-          disabled={contacts.length > 0}
+          disabled={disableInputs && !file}
         />
-        <button type="submit" disabled={contacts.length > 0 || !file}>
+        <button type="submit" disabled={!file}>
           Upload File
         </button>
       </form>
